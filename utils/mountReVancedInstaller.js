@@ -36,11 +36,17 @@ module.exports = async function mountReVancedInstaller(deviceId) {
   }
 
   // Copy ReVanced APK to temp.
-  await exec(
-    `adb -s ${deviceId} push revanced/${global.outputName} /data/local/tmp/revanced.delete`
-  );
+  // await exec(
+  //   `adb -s ${deviceId} push revanced/${global.outputName} /data/local/tmp/revanced.delete`
+  // );
+
   // Create folder
   await runCommand('su -c \'mkdir -p "/data/adb/revanced/"\'', deviceId);
+
+  // Copy ReVanced APK to revanced dir.
+  await exec(
+    `adb -s ${deviceId} push revanced/${global.outputName} /data/adb/revanced/${pkg}.apk`
+  );
 
   // Prepare mounting
   await runCommand(

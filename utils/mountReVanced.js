@@ -8,11 +8,17 @@ const exec = require('./promisifiedExec.js');
  */
 module.exports = async function mountReVanced(pkg, ws) {
   // Copy ReVanced APK to temp.
-  await exec(
-    `su -c 'cp "revanced/${global.outputName}" "/data/local/tmp/revanced.delete"'`
-  );
+  // await exec(
+  //   `su -c 'cp "revanced/${global.outputName}" "/data/local/tmp/revanced.delete"'`
+  // );
+
   // Create folder
   await exec('su -c \'mkdir -p "/data/adb/revanced/"\'');
+
+  // Copy ReVanced APK to revanced dir.
+  await exec(
+    `su -c 'cp "revanced/${global.outputName}" "/data/adb/revanced/${pkg}.apk"'`
+  );
 
   // Unmount the already existing ReVanced APK, so it can be updated
   try {
@@ -27,7 +33,7 @@ module.exports = async function mountReVanced(pkg, ws) {
 
   // Move APK to folder
   await exec(
-    `su -c 'base_path="/data/adb/revanced/${pkg}.apk" && mv -f "/data/local/tmp/revanced.delete" "$base_path" && chmod 644 "$base_path" && chown system:system "$base_path" && chcon u:object_r:apk_data_file:s0 "$base_path"'`
+    `su -c 'base_path="/data/adb/revanced/${pkg}.apk" && chmod 644 "$base_path" && chown system:system "$base_path" && chcon u:object_r:apk_data_file:s0 "$base_path"'`
   );
 
   // Create mount script
