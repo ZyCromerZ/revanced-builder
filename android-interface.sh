@@ -50,7 +50,7 @@ error() {
 
 dload_and_install() {
   log "Downloading revanced-builder..."
-  curl -sLo revanced-builder.zip https://github.com/reisxd/revanced-builder/archive/refs/heads/main.zip
+  curl -sLo revanced-builder.zip https://github.com/ZyCromerZ/revanced-builder/archive/refs/heads/main.zip
   log "Unzipping..."
   unzip -qqo revanced-builder.zip
   rm revanced-builder.zip
@@ -180,9 +180,9 @@ run_self_update() {
 
   # Download new version
   log "Downloading latest version..."
-  if ! curl -sLo $SCR_NAME_EXEC.tmp https://raw.githubusercontent.com/reisxd/revanced-builder/main/android-interface.sh ; then
+  if ! curl -sLo $SCR_NAME_EXEC.tmp https://raw.githubusercontent.com/ZyCromerZ/revanced-builder/main/android-interface.sh ; then
     log "Failed: Error while trying to download new version!"
-    log "File requested: https://raw.githubusercontent.com/reisxd/revanced-builder/main/android-interface.sh"
+    log "File requested: https://raw.githubusercontent.com/ZyCromerZ/revanced-builder/main/android-interface.sh"
     exit 1
   fi
   log "Done."
